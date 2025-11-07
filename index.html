@@ -1,229 +1,609 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Akash Reddy — Personal Portfolio</title>
 
-  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="./assets/css/style.css" />
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akash Reddy - Personal Portfolio</title>
+
+  <!--
+    - Tailwind CSS
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!--
+    - Google Font (Poppins)
+  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <main class="root">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" data-sidebar>
-      <div class="sidebar-info">
-        <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Akash avatar" width="120" />
+  <!--
+    - Custom Styles
+  -->
+  <style>
+    /* Use Poppins font */
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #232323;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4a4a4a;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Custom Colors */
+    :root {
+      --bg-dark: #1e1e1f;
+      --bg-light-dark: #29292a;
+      --text-light: #ececec;
+      --text-dark: #a1a1a1;
+      --border-color: #3f3f41;
+      --primary: #f29a02;
+      --primary-hover: #d38600;
+    }
+    
+    .bg-primary { background-color: var(--primary); }
+    .text-primary { color: var(--primary); }
+    .hover\:bg-primary-hover:hover { background-color: var(--primary-hover); }
+
+    /* Sidebar 'open' state */
+    .sidebar.open .sidebar-info_more {
+      max-height: 400px;
+      opacity: 1;
+      visibility: visible;
+    }
+    .sidebar.open .info_more-btn ion-icon {
+      transform: rotate(180deg);
+    }
+    
+    /* Page Navigation: Hide all pages by default */
+    [data-page] {
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    /* Show the 'active' page */
+    [data-page].active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Navbar 'active' link style */
+    .navbar-link.active {
+      color: var(--primary);
+    }
+    
+    /* Portfolio filter 'active' button style */
+    [data-filter-btn].active {
+      color: var(--text-light);
+      background-color: var(--primary);
+      border-radius: 8px;
+    }
+    
+    /* Hide portfolio items by default */
+    .project-item {
+      display: none;
+      animation: scaleUp 0.3s ease-in-out;
+    }
+    /* Show active items */
+    .project-item.active {
+      display: block;
+    }
+    
+    @keyframes scaleUp {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Form validation styles */
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+  </style>
+</head>
+
+<body class="bg-[--bg-dark] text-[--text-light] antialiased">
+
+  <!--
+    - #MAIN
+  -->
+
+  <main class="flex flex-col lg:flex-row max-w-7xl mx-auto p-4 lg:p-12 gap-8">
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="w-full lg:w-1/4 lg:max-w-xs p-6 bg-[--bg-light-dark] rounded-2xl shadow-lg lg:sticky lg:top-12" data-sidebar style="align-self: flex-start;">
+
+      <div class="flex items-center lg:flex-col lg:items-center gap-4 lg:gap-0">
+
+        <figure class="w-20 h-20 lg:w-32 lg:h-32 rounded-full overflow-hidden">
+          <!-- Replaced local image with a placeholder -->
+          <img src="https://placehold.co/150x150/f29a02/1e1e1f?text=AR" alt="Akash Reddy Gopidi" class="w-full h-full object-cover">
         </figure>
 
-        <div class="info-content">
-          <h1 class="name">Akash Reddy Gopidi</h1>
-          <p class="title">Software Engineer</p>
+        <div class="info-content text-left lg:text-center lg:mt-6">
+          <h1 class="text-2xl font-semibold text-white" title="Akash Reddy Gopidi">Akash Reddy Gopidi</h1>
+          <p class="text-sm text-[--text-dark] bg-[--bg-dark] px-3 py-1 rounded-md mt-2 inline-block">Software Engineer</p>
         </div>
 
-        <button class="info-more-btn" data-sidebar-btn aria-expanded="false" aria-controls="sidebar-more">
-          <span class="visually-hidden">Toggle contacts</span>
-          <span class="chev">▾</span>
+        <button class="info_more-btn lg:hidden ml-auto p-2 bg-[--bg-dark] rounded-lg" data-sidebar-btn>
+          <ion-icon name="chevron-down" class="text-lg transition-transform duration-300"></ion-icon>
         </button>
-      </div>
 
-      <div id="sidebar-more" class="sidebar-info-more" data-sidebar-more>
-        <hr class="separator" />
-        <ul class="contacts-list">
-          <li class="contact-item">
-            <div class="icon-box">✉️</div>
+      </div>
+      
+      <!-- Collapsible contact info for mobile -->
+      <div class="sidebar-info_more lg:block overflow-hidden max-h-0 lg:max-h-full opacity-0 lg:opacity-100 visibility-hidden lg:visibility-visible transition-all duration-300 ease-in-out">
+        <div class="border-t border-[--border-color] my-6"></div>
+
+        <ul class="flex flex-col gap-4">
+
+          <li class="flex items-center gap-4">
+            <div class="icon-box w-10 h-10 flex items-center justify-center bg-[--bg-dark] rounded-lg text-lg text-[--primary]">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
             <div class="contact-info">
-              <p class="contact-title">Email</p>
-              <a href="mailto:gopidiakashreddy@gmail.com" class="contact-link">gopidiakashreddy@gmail.com</a>
+              <p class="contact-title text-xs text-[--text-dark]">Email</p>
+              <a href="mailto:gopidiakashreddy@gmail.com" class="contact-link text-sm break-all">gopidiakashreddy@gmail.com</a>
             </div>
           </li>
-          <li class="contact-item">
-            <div class="icon-box">📞</div>
+
+          <li class="flex items-center gap-4">
+            <div class="icon-box w-10 h-10 flex items-center justify-center bg-[--bg-dark] rounded-lg text-lg text-[--primary]">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
             <div class="contact-info">
-              <p class="contact-title">Phone</p>
-              <a href="tel:+919110548579" class="contact-link">+91 91105 48579</a>
+              <p class="contact-title text-xs text-[--text-dark]">Phone</p>
+              <a href="tel:+919110548579" class="contact-link text-sm">+91 9110548579</a>
             </div>
           </li>
-          <li class="contact-item">
-            <div class="icon-box">🎂</div>
+
+          <li class="flex items-center gap-4">
+            <div class="icon-box w-10 h-10 flex items-center justify-center bg-[--bg-dark] rounded-lg text-lg text-[--primary]">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
             <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-              <time datetime="2003-10-19">October 19, 2003</time>
+              <p class="contact-title text-xs text-[--text-dark]">Birthday</p>
+              <time datetime="2003-10-19" class="text-sm">October 19, 2003</time>
             </div>
           </li>
-          <li class="contact-item">
-            <div class="icon-box">📍</div>
+
+          <li class="flex items-center gap-4">
+            <div class="icon-box w-10 h-10 flex items-center justify-center bg-[--bg-dark] rounded-lg text-lg text-[--primary]">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
             <div class="contact-info">
-              <p class="contact-title">Location</p>
-              <address>Hyderabad, India</address>
+              <p class="contact-title text-xs text-[--text-dark]">Location</p>
+              <address class="text-sm not-italic">Hyderabad, India</address>
             </div>
           </li>
+
         </ul>
 
-        <hr class="separator" />
-        <ul class="social-list">
-          <li class="social-item"><a href="https://www.linkedin.com/in/gopidi-akash" target="_blank" rel="noopener">LinkedIn</a></li>
+        <div class="border-t border-[--border-color] my-6"></div>
+
+        <ul class="flex justify-center lg:justify-start gap-4">
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/gopidi-akash" target="_blank" class="social-link text-xl text-[--text-dark] hover:text-[--text-light] transition-colors">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+          <!-- Add more social links here if needed -->
         </ul>
+
       </div>
+
     </aside>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
+    <!--
+      - #main-content
+    -->
 
-      <!-- NAV -->
-      <nav class="navbar" aria-label="Main navigation">
-        <ul class="navbar-list">
-          <li><button class="navbar-link active" data-nav-link>About</button></li>
-          <li><button class="navbar-link" data-nav-link>Resume</button></li>
-          <li><button class="navbar-link" data-nav-link>Portfolio</button></li>
-          <li><button class="navbar-link" data-nav-link>Contact</button></li>
+    <div class="main-content w-full lg:w-3/4">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar bg-[--bg-light-dark] p-4 rounded-2xl mb-8">
+        <ul class="flex justify-around">
+          <li class="navbar-item">
+            <button class="navbar-link text-[--text-dark] hover:text-primary transition-colors font-medium active" data-nav-link>About</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link text-[--text-dark] hover:text-primary transition-colors font-medium" data-nav-link>Resume</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link text-[--text-dark] hover:text-primary transition-colors font-medium" data-nav-link>Portfolio</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link text-[--text-dark] hover:text-primary transition-colors font-medium" data-nav-link>Contact</button>
+          </li>
         </ul>
       </nav>
 
-      <!-- ABOUT -->
-      <article class="about" data-page="about">
-        <header><h2 class="article-title">About me</h2></header>
-        <section class="about-text">
-          <p>Hi, I’m Akash Reddy Gopidi, an enthusiastic and driven entry-level Software Developer with a strong foundation in Software Engineering and Data Analysis.</p>
-          <p>I specialize in integrating modern ML/AI models into production-ready applications. I value clean code, scalable architecture, and data-driven results. 💡🚀</p>
-        </section>
+      <!--
+        - #PAGES (About, Resume, Portfolio, Contact)
+      -->
+      <div class="pages">
 
-        <section class="service">
-          <h3>What I'm doing</h3>
-          <ul class="service-list">
-            <li class="service-item">
-              <div class="service-icon-box"><img src="./assets/images/icon-design.svg" alt="" width="40"></div>
-              <div class="service-content">
-                <h4>Data Analytics / Machine Learning</h4>
-                <p>Built YOLOv3 traffic signal optimization, CNN vehicle classification, and NLP predictive analysis integrated into apps.</p>
-              </div>
-            </li>
-            <li class="service-item">
-              <div class="service-icon-box"><img src="./assets/images/icon-dev.svg" alt="" width="40"></div>
-              <div class="service-content">
-                <h4>Web Development</h4>
-                <p>Created DecorAI — 3D room builder + AR marketplace + AI image generation backend.</p>
-              </div>
-            </li>
-          </ul>
-        </section>
-      </article>
+        <!--
+          - #ABOUT
+        -->
+        <article class="about active" data-page="about">
+          <header>
+            <h2 class="text-3xl font-bold mb-6 text-white border-b border-[--border-color] pb-4">About me</h2>
+          </header>
+          <section class="about-text space-y-4 text-sm text-[--text-dark] leading-relaxed">
+            <p>
+              Hi, I’m Akash Reddy Gopidi, an enthusiastic and driven Entry-Level Software Developer with a versatile foundation spanning both Software Engineering and Data Analysis.
+            </p>
+            <p>
+              I specialize in integrating modern ML/AI models into functional, production-ready applications. I am eager to apply my analytical and engineering skills to contribute immediately to a challenging role that values clean code, scalable architecture, and data-driven insights. Let's build the next generation of intelligent software. 💡🚀
+            </p>
+          </section>
 
-      <!-- RESUME -->
-      <article class="resume" data-page="resume" hidden>
-        <header><h2 class="article-title">Resume</h2></header>
-        <section class="timeline">
-          <div class="title-wrapper"><div class="icon-box">📚</div><h3>Education</h3></div>
-          <ol class="timeline-list">
-            <li class="timeline-item">
-              <h4>Gokaraju Rangaraju Institute Of Technology, Hyderabad</h4>
-              <span>2021 — 2025</span>
-              <p>Bachelor's degree in Information Technology</p>
-            </li>
-          </ol>
-        </section>
+          <!-- service -->
+          <section class="service mt-10">
+            <h3 class="text-xl font-bold mb-6 text-white">What i'm doing</h3>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <section class="skill">
-          <h3>My skills</h3>
-          <ul class="skills-list">
-            <li class="skill-item"><div class="skill-title">Web Development <span class="skill-value">80%</span></div><div class="skill-bar"><div style="width:80%"></div></div></li>
-            <li class="skill-item"><div class="skill-title">Data Analytics <span class="skill-value">85%</span></div><div class="skill-bar"><div style="width:85%"></div></div></li>
-            <li class="skill-item"><div class="skill-title">Full Stack <span class="skill-value">80%</span></div><div class="skill-bar"><div style="width:80%"></div></div></li>
-            <li class="skill-item"><div class="skill-title">Cloud & DevOps <span class="skill-value">70%</span></div><div class="skill-bar"><div style="width:70%"></div></div></li>
-          </ul>
-        </section>
-      </article>
+              <li class="service-item p-6 bg-[--bg-light-dark] rounded-2xl shadow-lg flex flex-col md:flex-row gap-4">
+                <div class="service-icon-box w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[--bg-dark] rounded-lg">
+                  <!-- Replaced with inline SVG -->
+                  <svg class="w-6 h-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M9 20.25h6M9 4.5h6M9 12h6M3 10.5h18M3 15h18M3 5.25h18M3 9h18M3 18.75h18" />
+                  </svg>
+                </div>
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title text-white font-semibold mb-2">Data Analytics/Machine Learning</h4>
+                  <p class="service-item-text text-sm text-[--text-dark] leading-relaxed">
+                    Developed and deployed advanced machine learning solutions, including Computer Vision (YOLOV3), Deep Learning (TensorFlow/CNN), and NLP (SVC, TF-IDF).
+                  </p>
+                </div>
+              </li>
 
-      <!-- PORTFOLIO -->
-      <article class="portfolio" data-page="portfolio" hidden>
-        <header><h2 class="article-title">Portfolio</h2></header>
+              <li class="service-item p-6 bg-[--bg-light-dark] rounded-2xl shadow-lg flex flex-col md:flex-row gap-4">
+                <div class="service-icon-box w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[--bg-dark] rounded-lg">
+                  <!-- Replaced with inline SVG -->
+                  <svg class="w-6 h-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5 0-3 16.5" />
+                  </svg>
+                </div>
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title text-white font-semibold mb-2">Web Development</h4>
+                  <p class="service-item-text text-sm text-[--text-dark] leading-relaxed">
+                    Engineered DecorAI, a virtual design platform with a 3D Room Builder and AR Marketplace, demonstrating full-stack capability with AI/LLM integration.
+                  </p>
+                </div>
+              </li>
 
-        <div class="controls">
-          <div class="filter-select-box">
-            <button class="filter-select" data-select aria-haspopup="listbox" aria-expanded="false">
-              <span data-select-value>Select category</span>
-              <span class="chev">▾</span>
-            </button>
-            <ul class="select-list" role="listbox" aria-hidden="true">
-              <li><button data-select-item>All</button></li>
-              <li><button data-select-item>Web Development</button></li>
-              <li><button data-select-item>Data Analytics</button></li>
-              <li><button data-select-item>Machine Learning</button></li>
             </ul>
-          </div>
+          </section>
+        </article>
 
-          <ul class="filter-list" aria-hidden="true">
-            <li><button data-filter-btn class="active">All</button></li>
-            <li><button data-filter-btn>Web Development</button></li>
-            <li><button data-filter-btn>Data Analytics</button></li>
-            <li><button data-filter-btn>Machine Learning</button></li>
-          </ul>
-        </div>
+        <!--
+          - #RESUME
+        -->
+        <article class="resume" data-page="resume">
+          <header>
+            <h2 class="text-3xl font-bold mb-6 text-white border-b border-[--border-color] pb-4">Resume</h2>
+          </header>
 
-        <ul class="project-list">
-          <li class="project-item active" data-filter-item data-category="web development">
-            <figure class="project-img"><img src="./assets/images/project-room.jpg" alt="Room Design"></figure>
-            <h3>Room Design - Decor AI</h3><p class="project-category">Web Development</p>
-          </li>
-
-          <li class="project-item active" data-filter-item data-category="data analytics">
-            <figure class="project-img"><img src="./assets/images/project-nlp.jpg" alt="Predictive Analysis"></figure>
-            <h3>Predictive Analysis - NLP</h3><p class="project-category">Data Analytics</p>
-          </li>
-
-          <li class="project-item active" data-filter-item data-category="machine learning">
-            <figure class="project-img"><img src="./assets/images/project-cnn.jpg" alt="Vehicle Classification"></figure>
-            <h3>Vehicle Classification - CNN</h3><p class="project-category">Machine Learning</p>
-          </li>
-
-          <li class="project-item active" data-filter-item data-category="data analytics & machine learning">
-            <figure class="project-img"><img src="./assets/images/project-signal.jpg" alt="Signal Analysis"></figure>
-            <h3>Pedestrian Signal Analysis - YOLOv3</h3><p class="project-category">Data Analytics & Machine Learning</p>
-          </li>
-        </ul>
-      </article>
-
-      <!-- CONTACT -->
-      <article class="contact" data-page="contact" hidden>
-        <header><h2 class="article-title">Contact</h2></header>
-        <section class="contact-form">
-          <h3>Contact Form</h3>
-          <form class="form" data-form>
-            <div class="input-wrapper">
-              <input type="text" name="fullname" placeholder="Full name" required data-form-input>
-              <input type="email" name="email" placeholder="Email address" required data-form-input>
+          <section class="timeline">
+            <div class="title-wrapper flex items-center gap-3 mb-6">
+              <div class="icon-box w-10 h-10 flex items-center justify-center bg-[--bg-light-dark] rounded-lg text-lg text-[--primary]">
+                <ion-icon name="book-outline"></ion-icon>
+              </div>
+              <h3 class="text-xl font-bold text-white">Education</h3>
             </div>
-            <textarea name="message" placeholder="Your Message" required data-form-input></textarea>
-            <button type="submit" class="form-btn" data-form-btn disabled>
-              <span>Send Message</span>
-            </button>
-          </form>
-        </section>
-      </article>
+            <ol class="timeline-list space-y-6 pl-12 relative border-l border-[--border-color] ml-5">
+              <li class="timeline-item relative">
+                <div class="absolute w-4 h-4 bg-[--primary] rounded-full -left-[27px] top-1 border-4 border-[--bg-dark]"></div>
+                <h4 class="h4 timeline-item-title text-white font-semibold">Gokaraju Rangaraju Institute Of Technology, Hyderabad</h4>
+                <span class="text-xs text-[--text-dark]">2021 — 2025</span>
+                <p class="timeline-text text-sm text-[--text-dark] mt-2">
+                  Bachelor's degree in Information Technology, GRIET
+                </p>
+              </li>
+            </ol>
+          </section>
 
-    </div>
+          <section class="skill mt-10">
+            <h3 class="text-xl font-bold mb-6 text-white">My skills</h3>
+            <ul class="skills-list grid grid-cols-1 md:grid-cols-2 gap-6">
+              <li class="skills-item">
+                <div class="title-wrapper flex justify-between items-center mb-2">
+                  <h5 class="h5 text-sm font-medium">Web Development</h5>
+                  <data value="80" class="text-sm text-[--text-dark]">80%</data>
+                </div>
+                <div class="skill-progress-bg h-1.5 w-full bg-[--bg-light-dark] rounded-full">
+                  <div class="skill-progress-fill h-full bg-primary rounded-full" style="width: 80%;"></div>
+                </div>
+              </li>
+              <li class="skills-item">
+                <div class="title-wrapper flex justify-between items-center mb-2">
+                  <h5 class="h5 text-sm font-medium">Data Analytics</h5>
+                  <data value="85" class="text-sm text-[--text-dark]">85%</data>
+                </div>
+                <div class="skill-progress-bg h-1.5 w-full bg-[--bg-light-dark] rounded-full">
+                  <div class="skill-progress-fill h-full bg-primary rounded-full" style="width: 85%;"></div>
+                </div>
+              </li>
+              <li class="skills-item">
+                <div class="title-wrapper flex justify-between items-center mb-2">
+                  <h5 class="h5 text-sm font-medium">Full Stack Development</h5>
+                  <data value="80" class="text-sm text-[--text-dark]">80%</data>
+                </div>
+                <div class="skill-progress-bg h-1.5 w-full bg-[--bg-light-dark] rounded-full">
+                  <div class="skill-progress-fill h-full bg-primary rounded-full" style="width: 80%;"></div>
+                </div>
+              </li>
+              <li class="skills-item">
+                <div class="title-wrapper flex justify-between items-center mb-2">
+                  <h5 class="h5 text-sm font-medium">Cloud & DevOps</h5>
+                  <data value="70" class="text-sm text-[--text-dark]">70%</data>
+                </div>
+                <div class="skill-progress-bg h-1.5 w-full bg-[--bg-light-dark] rounded-full">
+                  <div class="skill-progress-fill h-full bg-primary rounded-full" style="width: 70%;"></div>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </article>
+
+        <!--
+          - #PORTFOLIO
+        -->
+        <article class="portfolio" data-page="portfolio">
+          <header>
+            <h2 class="text-3xl font-bold mb-6 text-white border-b border-[--border-color] pb-4">Portfolio</h2>
+          </header>
+
+          <section class="projects">
+            
+            <!-- Filter Buttons -->
+            <ul class="filter-list flex flex-wrap gap-2 mb-6">
+              <li class="filter-item"><button class="px-4 py-1 text-sm text-[--text-dark] hover:text-[--text-light] transition-colors active" data-filter-btn>All</button></li>
+              <li class="filter-item"><button class="px-4 py-1 text-sm text-[--text-dark] hover:text-[--text-light] transition-colors" data-filter-btn>Web Development</button></li>
+              <li class="filter-item"><button class="px-4 py-1 text-sm text-[--text-dark] hover:text-[--text-light] transition-colors" data-filter-btn>Data Analytics</button></li>
+              <li class="filter-item"><button class="px-4 py-1 text-sm text-[--text-dark] hover:text-[--text-light] transition-colors" data-filter-btn>Machine Learning</button></li>
+            </ul>
+
+            <!-- Project Grid -->
+            <ul class="project-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+              <!-- Project 1 -->
+              <li class="project-item group" data-filter-item data-category="web development">
+                <a href="#" class="block bg-[--bg-light-dark] rounded-2xl p-4 shadow-lg">
+                  <figure class="project-img relative rounded-lg overflow-hidden h-48">
+                    <div class="project-item-icon-box absolute inset-0 bg-black/50 flex items-center justify-center text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                    <!-- Replaced local image -->
+                    <img src="https://placehold.co/400x300/555/ececec?text=Decor+AI" alt="Room Design" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                  </figure>
+                  <h3 class="project-title text-white font-semibold mt-4">Room Design - Decor AI</h3>
+                  <p class="project-category text-sm text-[--text-dark] mt-1">Web Development</p>
+                </a>
+              </li>
+
+              <!-- Project 2 -->
+              <li class="project-item group" data-filter-item data-category="data analytics">
+                <a href="#" class="block bg-[--bg-light-dark] rounded-2xl p-4 shadow-lg">
+                  <figure class="project-img relative rounded-lg overflow-hidden h-48">
+                    <div class="project-item-icon-box absolute inset-0 bg-black/50 flex items-center justify-center text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                    <!-- Replaced local image -->
+                    <img src="https://placehold.co/400x300/555/ececec?text=NLP+Analysis" alt="Predictive Analysis" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                  </figure>
+                  <h3 class="project-title text-white font-semibold mt-4">Predictive Analysis - NLP</h3>
+                  <p class="project-category text-sm text-[--text-dark] mt-1">Data Analytics</p>
+                </a>
+              </li>
+              
+              <!-- Project 3 -->
+              <li class="project-item group" data-filter-item data-category="machine learning">
+                <a href="#" class="block bg-[--bg-light-dark] rounded-2xl p-4 shadow-lg">
+                  <figure class="project-img relative rounded-lg overflow-hidden h-48">
+                    <div class="project-item-icon-box absolute inset-0 bg-black/50 flex items-center justify-center text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                    <!-- Replaced local image -->
+                    <img src="https://placehold.co/400x300/555/ececec?text=Vehicle+CNN" alt="Vehicle Classification" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                  </figure>
+                  <h3 class="project-title text-white font-semibold mt-4">Vehicle Classification - CNN</h3>
+                  <p class="project-category text-sm text-[--text-dark] mt-1">Machine Learning</p>
+                </a>
+              </li>
+
+              <!-- Project 4 -->
+              <li class="project-item group" data-filter-item data-category="data analytics machine learning">
+                <a href="#" class="block bg-[--bg-light-dark] rounded-2xl p-4 shadow-lg">
+                  <figure class="project-img relative rounded-lg overflow-hidden h-48">
+                    <div class="project-item-icon-box absolute inset-0 bg-black/50 flex items-center justify-center text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                    <!-- Replaced local image -->
+                    <img src="https://placehold.co/400x300/555/ececec?text=Signal+YOLO" alt="Signal Analysis" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                  </figure>
+                  <h3 class="project-title text-white font-semibold mt-4">Pedestrian Signal Analysis - YOLOV3</h3>
+                  <p class="project-category text-sm text-[--text-dark] mt-1">Data Analytics & Machine Learning</p>
+                </a>
+              </li>
+
+            </ul>
+          </section>
+        </article>
+
+        <!--
+          - #CONTACT
+        -->
+        <article class="contact" data-page="contact">
+          <header>
+            <h2 class="text-3xl font-bold mb-6 text-white border-b border-[--border-color] pb-4">Contact</h2>
+          </header>
+
+          <section class="contact-form">
+            <h3 class="text-xl font-bold mb-6 text-white">Contact Form</h3>
+
+            <form action="#" class="form space-y-6" data-form>
+              <div class="input-wrapper grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="text" name="fullname" class="form-input w-full p-4 bg-[--bg-light-dark] rounded-lg border-2 border-[--border-color] focus:outline-none transition-colors" placeholder="Full name" required data-form-input>
+                <input type="email" name="email" class="form-input w-full p-4 bg-[--bg-light-dark] rounded-lg border-2 border-[--border-color] focus:outline-none transition-colors" placeholder="Email address" required data-form-input>
+              </div>
+              <textarea name="message" class="form-input w-full p-4 bg-[--bg-light-dark] rounded-lg border-2 border-[--border-color] focus:outline-none transition-colors h-36" placeholder="Your Message" required data-form-input></textarea>
+              <button class="form-btn bg-primary hover:bg-primary-hover text-black font-bold py-3 px-6 rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" type="submit" disabled data-form-btn>
+                <ion-icon name="paper-plane"></ion-icon>
+                <span>Send Message</span>
+              </button>
+            </form>
+          </section>
+        </article>
+
+      </div> <!-- End .pages -->
+    </div> <!-- End .main-content -->
   </main>
 
-  <!-- Modal (testimonials / generic) -->
-  <div class="modal-container" data-modal-container hidden>
-    <div class="overlay" data-overlay></div>
-    <div class="testimonials-modal" role="dialog" aria-modal="true" aria-hidden="true">
-      <button class="modal-close-btn" data-modal-close-btn aria-label="Close">✕</button>
-      <div class="modal-avatar-box"><img data-modal-img src="./assets/images/my-avatar.png" alt="avatar" width="80"></div>
-      <div class="modal-content">
-        <h3 data-modal-title>Title</h3>
-        <time datetime=""></time>
-        <div data-modal-text>Text</div>
-      </div>
-    </div>
-  </div>
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-  <script type="module" src="./assets/js/script.js"></script>
+  <!--
+    - custom js
+  -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Sidebar Toggle for Mobile ---
+      const sidebar = document.querySelector('[data-sidebar]');
+      const sidebarBtn = document.querySelector('[data-sidebar-btn]');
+      if (sidebarBtn) {
+        sidebarBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+
+      // --- Page Navigation ---
+      const navButtons = document.querySelectorAll('[data-nav-link]');
+      const pages = document.querySelectorAll('[data-page]');
+      const mainContent = document.querySelector('.main-content');
+
+      navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const targetPage = button.textContent.toLowerCase();
+
+          // Deactivate all
+          navButtons.forEach(btn => btn.classList.remove('active'));
+          pages.forEach(page => page.classList.remove('active'));
+
+          // Activate target
+          button.classList.add('active');
+          const activePage = document.querySelector(`[data-page="${targetPage}"]`);
+          if (activePage) {
+            activePage.classList.add('active');
+          }
+          
+          // Scroll to top of main content on page change
+          mainContent.scrollTo(0, 0);
+        });
+      });
+
+      // --- Portfolio Filtering ---
+      const filterButtons = document.querySelectorAll('[data-filter-btn]');
+      const projectItems = document.querySelectorAll('[data-filter-item]');
+      
+      // Show all projects by default
+      filterProjects('all');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const filter = button.textContent.toLowerCase();
+          
+          // Update button active state
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          // Filter projects
+          filterProjects(filter);
+        });
+      });
+
+      function filterProjects(filter) {
+        projectItems.forEach(item => {
+          const category = item.dataset.category.toLowerCase();
+          if (filter === 'all' || category.includes(filter)) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+      
+      // Handle the "Data Analytics & Machine Learning" category
+      // This is a correction to your original structure
+      const mlDaButton = document.querySelector('[data-filter-btn][data-select-item="Machine Learning"]');
+      if (mlDaButton) {
+        mlDaButton.addEventListener('click', () => {
+           projectItems.forEach(item => {
+              const category = item.dataset.category.toLowerCase();
+              if (category.includes('machine learning')) {
+                item.classList.add('active');
+              }
+           });
+        });
+      }
+
+
+      // --- Contact Form Validation ---
+      const form = document.querySelector('[data-form]');
+      const formInputs = document.querySelectorAll('[data-form-input]');
+      const formBtn = document.querySelector('[data-form-btn]');
+
+      const checkFormValidity = () => {
+        if (form.checkValidity()) {
+          formBtn.removeAttribute('disabled');
+        } else {
+          formBtn.setAttribute('disabled', '');
+        }
+      };
+
+      formInputs.forEach(input => {
+        input.addEventListener('input', checkFormValidity);
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Form submitted! (This is a demo)');
+        form.reset();
+        checkFormValidity();
+      });
+
+    });
+  </script>
+
 </body>
+
 </html>
